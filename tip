@@ -1,0 +1,15 @@
+数组
+1. (int& item: a1) = (int i = 0; i < size; i++) a1是数组名 item相当于数组中每一个元素 这是一种特殊表达把
+
+2.  &a:0x63fd70 
+    &a+1:0x63fd84 = a+5     
+    a+1:0x63fd74    
+
+3.  (auto item = v4.begin(); item != v4.end(); ++item)
+    vector<int>::iterator item;
+
+4.  int a[2][5];
+    printArray(a);
+
+    template <size_t n, size_t m>
+    void printArray(int (&a)[n][m]){} leetcode教程

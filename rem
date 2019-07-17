@@ -1,0 +1,17 @@
+1.  逆转链表 至少用3个node
+     void reverseLinkedList(){
+         if (head == NULL || head.next == NULL)
+            return;
+        Node p1 = head;
+        Node p2 = head.next;
+        Node p3 = NULL;
+
+        while (p2 != NULL){
+            p3 = p2.next;
+            p2.next = p1;
+            p1 = p2;
+            p2 = p3;
+        }//p1.next怎么释放
+        head.next = NULL;
+        head = p1;
+     }

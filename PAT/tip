@@ -1,0 +1,6 @@
+1. map<int, int> m; m[i]++;
+
+2. amazing string[0] 直接就是ASCII的值 可以直接被int类型的变量加减。
+
+3.  vector<vector<int>> v;
+    vector<int> v[]; 无区别
