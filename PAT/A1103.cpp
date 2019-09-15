@@ -17,20 +17,23 @@
 // }
 
 //参考答案
+// 2019-9-13 回溯剪枝 是什么？
 #include <iostream>
 #include <vector>
 #include <cmath>
 using namespace std;
 int n, k, p, maxFacSum = -1;
 vector<int> v, ans, tempAns;
+// n 169 k 5 p 2
 void init(){
     int temp = 0, index = -1;
     while (temp <= n){
         v.push_back(temp);//为什么这么初始化 index为什么从-1开始
-        temp = pow(index, p);
+        temp = pow(index, p);// index得加到14 
         index++;
     }
 }
+// v 最后得能push到 169
 void dfs(int index, int tempSum, int tempK, int facSum){
     if (tempK == k){
         if (tempSum == n && facSum > maxFacSum){
