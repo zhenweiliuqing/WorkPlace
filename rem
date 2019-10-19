@@ -15,3 +15,23 @@
         head.next = NULL;
         head = p1;
      }
+
+2.  quick sort
+    void QuickSort(int st, int end) {
+         if (st < end) {
+             int r = partition(st, end);
+             QuickSort(st, r - 1);
+             QuickSort(r + 1, end);
+         }
+    }
+    int partition(int st, int end) {
+        int i = st;
+        for (int j = st + 1; j <= end; j++) {
+            if (data[j] < data[st]) {
+                i++;
+                swap(data[i], data[j]); //用引用交换
+            } //小于pivot进行处理一下 最后是从小到大排列
+        }
+        swap(data[st], data[i]);
+        return i;
+    }
