@@ -13,3 +13,5 @@
 
     template <size_t n, size_t m>
     void printArray(int (&a)[n][m]){} leetcode教程
+
+5. sort()默认是升序。
