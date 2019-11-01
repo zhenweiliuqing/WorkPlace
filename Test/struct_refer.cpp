@@ -8,7 +8,7 @@ void func(int a, int b){
     a = 2;
     b = 2;
 }
-void func_1(node a)
+void func_1(node& a)
 {
     a.a = 2;
     a.b = 2;

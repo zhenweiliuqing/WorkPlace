@@ -2,8 +2,10 @@
 //参考答案
 #include <iostream>
 #include <vector>
+#include <queue>
 using namespace std;
 vector<int> v;
+queue<int> q;
 int a[1009], n, isMin = 1, isMax = 1;
 void dfs(int index){
     if (index * 2 > n && index * 2 + 1 > n){/// 这两个条件是怎么想出来的

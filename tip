@@ -13,3 +13,45 @@
 
     template <size_t n, size_t m>
     void printArray(int (&a)[n][m]){} leetcode教程
+
+5.  普通函数指针 
+    char (*pFun)(int);
+    char glFun(int a){return;}
+    pFun = glFun;
+    (*pFun)(2);
+
+    typedef 函数指针
+    typedef char (*PTRFUN)(int);
+    PTRFUN pFun;
+    char glFun(int a){return;}
+    pFun = glFun;
+    (*pFun)(2);
+
+6.  # 转换成字符串
+    ## 代码连接
+
+7. 类的静态成员函数时，如果在该函数内部引用了一个非静态成员，需要指定对象。
+
+8. 静态成员函数属于类而不属于对象。 什么时候需要指定对象？ 非静态 调用 非静态 没问题啊！
+   因为非静态默认有this指针 加不加 都可以。 那么静态成员函数一般都干啥用呢？他里边基本是调不了成员其他函数的。
+
+9. 类与对象的关系真的是繁琐复杂啊，改天地伟业界面有个问题，Main_Notify必须声明为一个静态成员函数作为函数指针传给一个初始化函数。
+    为什么呢？
+
+10. 指针函数是个函数，返回值是一个指针。
+
+11. sscanf(a, "%lf", &tmep); a是char[],是一个字符串,把字符串中的内容转化成temp的类型。
+    sprintf(b, "%.2f", temp);把temp两位浮点数转化成b,b是一个字符串。
+
+12.一. ”读“ ”写“ 能力
+
+char *a = "abcd";  此时"abcd"存放在常量区。通过指针只可以访问字符串常量，而不可以改变它。
+而char a[20] = "abcd"； 此时 "abcd"存放在栈。可以通过指针去访问和修改数组内容。
+二. 赋值时刻
+
+char *a = "abcd"; 是在编译时就确定了（因为为常量）。
+而char a[20] = "abcd"； 在运行时确定
+三. 存取效率
+
+char *a = "abcd"; 存于静态存储区。在栈上的数组比指针所指向字符串快。因此慢
+而char a[20] = "abcd"； 存于栈上。快
