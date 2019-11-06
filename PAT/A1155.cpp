@@ -46,6 +46,7 @@
 // 递归的思路怎么整理
 #include <iostream>
 #include <vector>
+#include <queue>
 using namespace std;
 vector<int> v;
 int n;

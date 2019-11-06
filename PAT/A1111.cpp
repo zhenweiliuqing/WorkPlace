@@ -1,5 +1,41 @@
-//2019-7-26
-//思路：dijkstra
+// //2019-9-9
+// //思路：应用两次dijkstra算法
+// #include <iostream>
+// #include <vector>
+// using namespace std;
+// #define inf 99999999
+// int disgraph[510][510];
+// int timegraph[510][510];
+// bool disvisit[510], timevisit[510];
+// int main() {
+//     int n, m;
+//     cin >> n >> m;
+//     int a, b, single, d, t;
+//     for (int i = 0; i < m; i++) {
+//         cin >> a >> b >> single >> d >> t;
+//         disgraph[a][b] = d;
+//         timegraph[a][b] = t;
+//         if (single == 0){
+//             disgraph[b][a] = d;
+//             timegraph[b][a] = t;
+//         }
+//     }
+//     for (int i = 0; i < 510; i++) {
+//         for (int j = 0; j < 510; j++) {
+//             disgraph[i][j] = -1;
+//             timegraph[i][j] = -1;
+//         }
+//     }
+//     // dijkstra
+//     for (int i = 0; i < n; i++)
+//     {
+//        //找到最近的
+//     }
+// }
+
+// 2019-9-23
+// 思路不清晰 看一下参考答案
+// 参考答案
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -9,19 +45,20 @@ int dis[510], Time[510], e[510][510], w[510][510], dispre[510], Timepre[510], we
 bool visit[510];
 vector<int> dispath, Timepath, temppath;
 int st, fin, minnode = inf;
-void dfsdispath(int v){
+// 从后往前找路径
+void dfsdispath(int v) {
     dispath.push_back(v);
     if (v == st)
         return;
     dfsdispath(dispre[v]);
 }
-void dfsTimepath(int v){
+void dfsTimepath(int v) {
     Timepath.push_back(v);
-    if (v == st)    
+    if (v == st)
         return;
     dfsTimepath(Timepre[v]);
 }
-int main(){
+int main() {
     fill(dis, dis + 510, inf);
     fill(Time, Time + 510, inf);
     fill(weight, weight + 510, inf);
@@ -34,7 +71,7 @@ int main(){
         scanf("%d %d %d %d %d", &a, &b, &flag, &len, &t);
         e[a][b] = len;
         w[a][b] = t;
-        if (flag != 1){
+        if (flag != 1) {
             e[b][a] = len;
             w[b][a] = t;
         }
@@ -43,9 +80,9 @@ int main(){
     dis[st] = 0;
     for (int i = 0; i < n; i++)
         dispre[i] = i;
-    for (int i = 0; i < n; i++){
+    for (int i = 0; i < n; i++) {
         int u = -1, minn = inf;
-        for (int j = 0; j < n; j++){
+        for (int j = 0; j < n; j++) {
             if (visit[j] == false && dis[j] < minn) {
                 u = j;
                 minn = dis[j];
@@ -55,10 +92,10 @@ int main(){
             break;
         visit[u] = true;
         for (int v = 0; v < n; v++) {
-            if(visit[v] == false && e[u][v] != inf) {
+            if (visit[v] == false && e[u][v] != inf) {
                 if (e[u][v] + dis[u] < dis[v]) {
                     dis[v] = e[u][v] + dis[u];
-                    dispre[v] = u;
+                    dispre[v] = u;// v的前一个是u
                     weight[v] = weight[u] + w[u][v];
                 } else if (e[u][v] + dis[u] == dis[v] && weight[v] > weight[u] + w[u][v]) {
                     weight[v] = weight[u] + w[u][v];
@@ -78,17 +115,17 @@ int main(){
                 minn = Time[j];
             }
         }
-        if ( u == -1)
+        if (u == -1)
             break;
         visit[u] = true;
-        for (int v = 0; v < n; v++){
+        for (int v = 0; v < n; v++) {
             if (visit[v] == false && w[u][v] != inf) {
-                if (w[u][v] + Time[u] < Time[v]){
+                if (w[u][v] + Time[u] < Time[v]) {
                     Time[v] = w[u][v] + Time[u];
-                    Timepre[v] = u;
+                    Timepre[v] = (u);
                     NodeNum[v] = NodeNum[u] + 1;
                 } else if (w[u][v] + Time[u] == Time[v] && NodeNum[u] + 1 < NodeNum[v]) {
-                    Timepre[v] = u;
+                    Timepre[v] = (u);
                     NodeNum[v] = NodeNum[u] + 1;
                 }
             }
@@ -96,18 +133,18 @@ int main(){
     }
     dfsTimepath(fin);
     printf("Distance = %d", dis[fin]);
-    if (dispath == Timepath){
+    if (dispath == Timepath) {
         printf("; Time = %d: ", Time[fin]);
     } else {
         printf(": ");
-        for (int i = dispath.size() - 1; i >= 0; i--){
+        for (int i = dispath.size() - 1; i >= 0; i--) {
             printf("%d", dispath[i]);
             if (i != 0)
                 printf(" -> ");
         }
         printf("\nTime = %d: ", Time[fin]);
     }
-    for (int i = Timepath.size() - 1; i >= 0; i--){
+    for (int i = Timepath.size() - 1; i >= 0; i--) {
         printf("%d", Timepath[i]);
         if (i != 0)
             printf(" -> ");

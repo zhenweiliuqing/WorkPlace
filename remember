@@ -1,0 +1,136 @@
+1.  逆转链表 至少用3个node
+     void reverseLinkedList(){
+         if (head == NULL || head.next == NULL)
+            return;
+        Node p1 = head;
+        Node p2 = head.next;
+        Node p3 = NULL;
+
+        while (p2 != NULL){
+            p3 = p2.next;
+            p2.next = p1;
+            p1 = p2;
+            p2 = p3;
+        }//p1.next怎么释放
+        head.next = NULL;
+        head = p1;
+     }
+
+2.  dfs 邻接矩阵 n个节点
+void dfs(int start){
+    for (int j = 0; j < n; j++){
+        if (!visit[j] && edge[start][j] == 1) {
+            visit[j] = true;
+            dfs(j);
+        }
+    }
+}
+
+邻接链表 v是vector<vector<int>>
+void dfs(int start) {
+    for (int i = 0; i < v[start].size(); i++) {
+        if (!visit[v[start][i]]){
+            visit[v[start][i]] = true;
+            dfs(v[start][i]);
+        }
+    }
+}
+
+拓展：深度优先搜索如果先是push 后来又pop 会怎么样？ A1131  A1155
+这个一般是在记录路径的时候会用到这个 不是很懂 
+
+3.  bfs 可能得用队列  邻接矩阵
+queue<int> q;
+void bfs(int start) {
+    q.push(start);
+    while (!q.empty()) {
+        temp = q.front(); //主要是这两步把首元素给吐出来
+        q.pop();
+        for (int i = 0; i < n; i++) {
+            if (!visit[i] && edge[temp][i] == 1) {
+                visit[i] = true;
+                q.push(visit[i]);
+            }
+        }
+    } 
+}
+
+4.dijkstra bfs的思想 加入了权重的因素
+void dijkstra(int start) {
+    for (int i = 0; i < n; i++) {
+        dis[i] = inf;
+    }
+    dis[start] = 0;
+    for (int i = 0; i < n; i++) {
+        //这一部分是通过遍历找到目前距离最短的点
+        int u = -1, min = inf;//距离最短的点
+        for (int j = 0; j < n; j++){
+            if (!visit[j] && dis[j] < min){
+                u = j;
+                min = dis[j];
+            }
+        }
+        //没有找到的话就退出
+        if (u == -1)
+            break;
+        visit[u] = true;
+
+        for (int k = 0; k < n; k++) {
+            if (!visit[k] && graph[u][k] != -1) {
+                if (dis[k] > dis[u] + graph[u][k])
+                    dis[k] = dis[u] + graph[u][k];
+            }
+        }// 只得到最短距离的话 就这些 如果要是还有其他变体的话 可以在里边加代码
+    }
+}
+
+5. 并查集 主要是两个函数 
+   至于如何利用好这两个函数 将重叠关系好好利用起来得靠自己的思路
+int findFather(int x) {
+    int rex = x;
+    while (x != father[x])
+        x = father[x]; 
+    while (rex != father[rex]) {
+        int temp = rex;
+        rex = father[rex];
+        father[temp] = x;
+    } // 这一招是精简组织结构 形成两级组织结构
+    return x; // 找到父亲的源头
+}
+void Union(int a, int b) {
+    int faA = findFather(a);
+    int faB = findFather(b);
+    if (faA != faB)
+        father[faA] = faB; // 这一招真的是釜底抽薪 
+}
+
+6.  quick sort
+    void QuickSort(int st, int end) {
+         if (st < end) {
+             int r = partition(st, end);
+             QuickSort(st, r - 1);
+             QuickSort(r + 1, end);
+         }
+    }
+    int partition(int st, int end) {
+        int i = st;
+        for (int j = st + 1; j <= end; j++) {
+            if (data[j] < data[st]) {
+                i++;
+                swap(data[i], data[j]); //用引用交换
+            } //小于pivot进行处理一下 最后是从小到大排列
+        }
+        swap(data[st], data[i]);
+        return i;
+    }
+
+7. isprime
+   bool isprime(int x) {
+        if (x == 1)
+          return false;
+        for (int i = 2; i <= sqrt(x); i++) {
+            if (x % i == 0)
+                return false;
+        }
+        return true;
+   }

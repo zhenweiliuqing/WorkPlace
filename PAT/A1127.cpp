@@ -1,37 +1,4 @@
 // //2019-7-22
-// //思路：通过中序后序建立一个层序 其中没有的位置空着
-// //然后再考虑输出
-// #include <iostream>
-// #include <vector>
-// using namespace std;
-// vector<int> in, post;
-// vector<int> level(31);
-// int n;
-// void levelOrder(int postroot, int instart, int inend, int index){
-//     if (instart > inend)
-//         return;
-//     int i = inend;
-//     while (post[postroot] != in[i])
-//         i--;
-//     levelOrder(postroot - 1 - inend + i, instart, i - 1, index * 2);
-//     if ((postroot - 1 - inend + i) > 0 )
-//         level[index * 2] = post[postroot - 1 - inend + i];
-//     levelOrder(postroot - 1, i + 1, inend, index * 2 + 1);
-//     if (postroot - 1 > 0)
-//         level[index * 2 + 1] = post[postroot - 1];
-// }
-// int main(){
-//     cin >> n;
-//     in.resize(n), post.resize(n);
-//     for (int i = 0; i < n; i++)
-//         cin >> in[i];
-//     for (int i = 0; i < n; i++)
-//         cin >> post[i];
-//     levelOrder(n - 1, 0, n - 1, 1);
-//     return 0;
-// }
-
-// //2019-7-22
 // //参考答案
 // #include <iostream>
 // #include <vector>
@@ -153,4 +120,8 @@ int main(){
     }
     return 0;
 }
+//上次做的题都快忘了思路了 
+//主要的知识点就是中序后序转层序 类似的有 前序中序转后序
+//然后就是广度优先搜索
+//然后会用到一些编程技巧 tree的使用和队列的使用
 //全对 但是中途看了好几次答案

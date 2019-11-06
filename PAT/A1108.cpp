@@ -30,6 +30,9 @@
 
 // 2019-9-30
 // 参考答案
+// 2019-10-12
+// 终于重拾信心 开始编程
+// 先抄一道
 #include <iostream>
 #include <cstdio>
 #include <string.h>
