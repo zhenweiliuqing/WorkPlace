@@ -30,3 +30,39 @@
 //     printf("\n");
 //     return 0;     
 // }
+
+// 2019-11-6
+// 思路：其实这个跟快速排序没有什么关系 就是判断一下自己下标所处的
+//       位置跟自己实际值一定要相同 同时还得是保证前面不能有比他大的
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+int v[100000];
+int main() {
+    int n, temp, max = 1;
+    int cnt = 0;
+    cin >> n;
+    vector<int> data(n), index(n);
+    for (int i = 0; i < n; i++){
+        scanf("%d", &temp);
+        data[i] = index[i] = temp;
+    }
+    sort(index.begin(), index.end());
+    for (int i = 0; i < n; i++) {
+        if (data[i] == index[i] && max <  index[i])
+            v[cnt++] = data[i];
+        if (data[i] > max)
+            max = data[i];
+        
+    }
+    cout << cnt << endl;
+    cout << v[0];
+    for (int i = 1; i < cnt; i++)
+        cout << " " << v[i];
+    return 0;
+}
+// 使用vector<int> res段错误 改用v答案错误
+// 因为输入的不一定是按1 2 3 4 5的顺序的
+// 部分正确21分
+// 可能有并列的？
