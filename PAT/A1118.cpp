@@ -21,7 +21,7 @@ void Union(int a, int b) {
     int faA = findFather(a);
     int faB = findFather(b);
     if (faA != faB)
-        fa[faA] = faB;
+        fa[faA] = faB; // 当父亲不一致的时候 以b的父亲fB为主 这个对吗？
 }
 bool exist[maxn];
 int main() {
@@ -37,7 +37,7 @@ int main() {
             Union(id, temp);
             exist[temp] = true;
         }
-    }
+   }
     for (int i = 1; i <= maxn; i++) {
         if (exist[i] == true) {
             int root = findFather(i);
