@@ -83,16 +83,27 @@ using namespace std;
 int main() {
     int n, cnt = 0;
     char input[50], convert[50];
-    char *point = ".00";
+    // char *point;
+    // point = ".00";
     double temp, sum = 0.0;
     vector<double> res;
+    
     cin >> n;
     for (int i = 0; i < n; i++) {
         scanf("%s", &input);
         sscanf(input, "%lf", &temp);
         sprintf(convert, "%.2f", temp);
         // strcat(input, point);
-        if (strcmp(input, convert) == 0 && temp <= 1000 && temp >= -1000){
+        // string sinput = input, sconvert = convert;
+        bool equal = true;
+        for (int j = 0; input[j] != '\0'; j++) {
+            if (input[j] != convert[j]) {
+                equal = false;
+                break;
+            } 
+        }
+
+        if (equal && temp <= 1000 && temp >= -1000){
             cnt++;
             sum += temp;
         }
@@ -102,3 +113,5 @@ int main() {
     printf("The average of %d numbers is %.2f", cnt, sum / cnt);
     return 0;
 }
+// 这可怎么办 转化了一下 小数位数变了 怎么判断小数位数相等
+// 部分正确 13分！ 不想写了
