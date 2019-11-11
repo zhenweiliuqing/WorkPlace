@@ -34,10 +34,10 @@
 //     for (int i = 1; i <= n; i++) {
 //         scanf("%d:", &k);
 //         for (int j = 0; j < k; j++) {
-//             scanf("%d", &t);//输入爱好 这他妈是糟糕的命名 
-//             if (course[t] == 0)
-//                 course[t] = i;
-//             Union(i, findFather(course[t]));
+//            scanf("%d", &t);//输入爱好 这他妈是糟糕的命名 
+//            if (course[t] == 0)
+//               course[t] = i; // 如果这个爱好没人喜欢 初始化为第一个喜欢它的人 
+//            Union(i, findFather(course[t])); // 第一个喜欢t的人的最父节点与i合并 因为i这个人也是喜欢t的
 //         }
 //     }
 //     for (int i = 1; i <= n; i++)

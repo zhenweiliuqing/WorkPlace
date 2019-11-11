@@ -14,6 +14,8 @@
     template <size_t n, size_t m>
     void printArray(int (&a)[n][m]){} leetcode教程
 
+5.  sort()默认是升序。    
+    sort(a, a + n, greater<int>());//可以降序了
 5.  普通函数指针 
     char (*pFun)(int);
     char glFun(int a){return;}
@@ -42,16 +44,58 @@
 
 11. sscanf(a, "%lf", &tmep); a是char[],是一个字符串,把字符串中的内容转化成temp的类型。
     sprintf(b, "%.2f", temp);把temp两位浮点数转化成b,b是一个字符串。
+ 
+12. char* char[]联系与区别
+    char* p1;//栈           char* p2="hello";//常量区  char* p3 = new char[6];//堆
+    char s[]="hello";//栈
+    联系:
+    1. p是一个指向char变量的指针, s是一个char数组(字符数组).
+    2. 传递参数时char* char[]可以混用.
+    区别：
+    1. char*可以被赋值, char[]值不能改变, 因为s是char数组的名字，是数组首元素的地址，是常量。 
+    2. char[]对应的内存区域总是可写, char*如果对应在常量区如p2就不可写.
+    3. p2的写法是不规范的, 应该是const char* p2="hello"; p2指向了字符常量
+    4. s是char const类型, 相当于char const *s = "hello";
+    5. "hello"本身存储在常量区, p2 是在堆栈上存储一个4字节的指针, 然后指向"hello"的区域.
+        s是在堆栈上先分配6字节的char数组, 然后把"hello"给复制过来.
+    
+    总结：
+    1. p2是一个指针变量，它的值（指向）是可以改变的，但只能指向（字符串）常量，指向的区域的内容不可改变；
+    2. s是一个指针常量，它的值（指向）不能变；但指向的目标（数组b在内存中的区域）的内容是可变的
 
-12.一. ”读“ ”写“ 能力
+    一. ”读“ ”写“ 能力
+   char *a = "abcd";  此时"abcd"存放在常量区。通过指针只可以访问字符串常量，而不可以改变它。
+   而char a[20] = "abcd"； 此时 "abcd"存放在栈。可以通过指针去访问和修改数组内容。
+   二. 赋值时刻
+   char *a = "abcd"; 是在编译时就确定了（因为为常量）。而char a[20] = "abcd"； 在运行时确定
+   三. 存取效率
+   char *a = "abcd"; 存于静态存储区。在栈上的数组比指针所指向字符串快。因此慢而char a[20] = "abcd"； 存于栈上。快
 
-char *a = "abcd";  此时"abcd"存放在常量区。通过指针只可以访问字符串常量，而不可以改变它。
-而char a[20] = "abcd"； 此时 "abcd"存放在栈。可以通过指针去访问和修改数组内容。
-二. 赋值时刻
+13. 字符串的一些操作
+    strcat(a, b)        a, b连接起来赋给a
+    strcmp(a, b) == 0   a, b相等
+    string s = p;       p是一个char[]  char转string
+    string.c_str()      string转char*
 
-char *a = "abcd"; 是在编译时就确定了（因为为常量）。
-而char a[20] = "abcd"； 在运行时确定
-三. 存取效率
+14. map<int, int> m; m[i]++;
 
-char *a = "abcd"; 存于静态存储区。在栈上的数组比指针所指向字符串快。因此慢
-而char a[20] = "abcd"； 存于栈上。快
+15. amazing string[0] 直接就是ASCII的值 可以直接被int类型的变量加减。
+
+16.  vector<vector<int>> v;
+    vector<int> v[]; 无区别 1146?
+
+17. map中按照结构体排序 默认是按照key从小到大
+typedef struct tagStudentInfo  
+{  
+    int iID;  
+    string  strName;  
+    bool operator < (tagStudentInfo const& r) const {  
+        //这个函数指定排序策略，按iID排序，如果iID相等的话，按strName排序  
+        if(iID < r.iID)  return true;  
+        if(iID == r.iID) return strName.compare(r.strName) < 0;  
+        return false;
+    }  
+}StudentInfo;//学生信息
+
+map<int, int, greater<int>> dp;//按照key从大到小
+按value排序就得压入pair中 用排序函数进行排序

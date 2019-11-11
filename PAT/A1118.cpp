@@ -47,7 +47,7 @@ int main() {
             Union(fbird, temp);
             fbird = temp;
         }
-    }
+   }
     for (int i = 1; i <= maxn; i++) {
         if (visit[i])
             findFather(i);

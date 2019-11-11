@@ -103,3 +103,34 @@ void Union(int a, int b) {
     if (faA != faB)
         father[faA] = faB; // 这一招真的是釜底抽薪 
 }
+
+6.  quick sort
+    void QuickSort(int st, int end) {
+         if (st < end) {
+             int r = partition(st, end);
+             QuickSort(st, r - 1);
+             QuickSort(r + 1, end);
+         }
+    }
+    int partition(int st, int end) {
+        int i = st;
+        for (int j = st + 1; j <= end; j++) {
+            if (data[j] < data[st]) {
+                i++;
+                swap(data[i], data[j]); //用引用交换
+            } //小于pivot进行处理一下 最后是从小到大排列
+        }
+        swap(data[st], data[i]);
+        return i;
+    }
+
+7. isprime
+   bool isprime(int x) {
+        if (x == 1)
+          return false;
+        for (int i = 2; i <= sqrt(x); i++) {
+            if (x % i == 0)
+                return false;
+        }
+        return true;
+   }
