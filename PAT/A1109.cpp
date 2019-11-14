@@ -17,7 +17,7 @@ int main() {
     vector<node> stu(n);
     for (int i = 0; i < n; i++) {
         cin >> stu[i].name;
-        cin >> stu[i].height;
+        cin >> stu[i].height; 
     }
     sort(stu.begin(), stu.end(), cmp); // 从高往低排 
     int t = 0, row = k;

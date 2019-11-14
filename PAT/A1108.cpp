@@ -82,7 +82,7 @@
 using namespace std;
 int main() {
     int n, cnt = 0;
-    char input[50], convert[50];
+    char input[50], convert[50]; // 如果用指针会如何？
     // char *point;
     // point = ".00";
     double temp, sum = 0.0;
@@ -110,8 +110,14 @@ int main() {
        else
             printf("ERROR: %s is not a legal number\n", input);
     }
-    printf("The average of %d numbers is %.2f", cnt, sum / cnt);
+    if (cnt == 0)
+        printf("The average of 0 numbers is Undefined");
+    else if (cnt == 1)
+        printf("The average of 1 number is %.2f", sum);
+    else 
+        printf("The average of %d numbers is %.2f", cnt, sum / cnt);
     return 0;
 }
 // 这可怎么办 转化了一下 小数位数变了 怎么判断小数位数相等
 // 部分正确 13分！ 不想写了
+// 满分了！！！ 输出有点问题 没有考虑周到！！
