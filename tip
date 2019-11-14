@@ -99,3 +99,26 @@ typedef struct tagStudentInfo
 
 map<int, int, greater<int>> dp;//按照key从大到小
 按value排序就得压入pair中 用排序函数进行排序
+
+18. 顶层const和底层const
+    <1> const与指针
+    int i = 0;
+    int *const j = &i; //指针j指向i, const修饰j本身, j的地址不允许修改, 但是可以通过j修改i的值
+    const int* k = &i; //指针k指向i, const修饰k指向的i, k的地址可以修改, 但是不可以通过k修改i的值
+    第一种情况修饰本身的称为顶层const  第二种修饰k所指向变量的const称为底层const
+
+    <2> const与引用
+    引用一旦初始化 就不能再修改 一个引用就相当于那个变量的别名 不能把这个名字指向别的变量 
+    引用相当于内置了顶层const 地址不允许修改
+    int i = 0;
+    const int &j = i; // j为绑定到i的const引 用 不允许使用j来修改i
+
+    <3> 修饰值本身的const均为顶层const 
+    const int i = 0; // 顶层cosnt
+
+19. 引用与指针的区别
+    <1> 引用只能在定义时初始化一次，之后不能改变指向其他的变量，但指针可以。
+    <2> 引用必须指向有效的变量，但指针可以为空。
+    <3> sizeof引用得到的是所指向的变量的大小，但sizeof指针是对象的地址的大小。
+    <4> 引用的自增（+ +）自减（- -）是对值的+1或-1，而指针++或–-是+或-其所指向的地址的加减
+    
