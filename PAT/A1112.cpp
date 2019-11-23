@@ -94,11 +94,27 @@
 #include <map>
 #include <set>
 using namespace std;
+set<int> sset;
 int main(){
     int n;
     string s;
     cin >> n >> s;
-    for (int i = 0; i < s.size(); i++){
-        
+    for (int i = 0; i < s.size() - 2; i++) {
+        if (s[i] == s[i + 1] && s[i] == s[i + 2]){
+            i += 2;
+            sset.insert(s[i]);
+        }
     }
+    set<int> fset;
+    for (auto it = sset.begin(); it != sset.end(); it++) {
+        for (int i = 0; i < s.size() - 2; i++) {
+           if (*it == s[i]) {
+               if (*it == s[i + 1] && *it == s[i + 2])
+                   fset.insert(s[i]);
+           }
+        }    
+    }
+    for (auto it = fset.begin(); it != fset.end(); it++)
+        cout << *it;
+    return 0;
 }
