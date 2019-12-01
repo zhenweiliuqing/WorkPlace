@@ -89,32 +89,46 @@
 // }
 
 
-
+// 2019-11-30
+// 思路：建立一个string
 #include <iostream>
 #include <map>
 #include <set>
 using namespace std;
-set<int> sset;
+set<char> sset;
+map<char, bool> mmap;
 int main(){
     int n;
     string s;
-    cin >> n >> s;
-    for (int i = 0; i < s.size() - 2; i++) {
-        if (s[i] == s[i + 1] && s[i] == s[i + 2]){
-            i += 2;
-            sset.insert(s[i]);
+    cin >> n >> s; // input cnt and string
+    int cnt = 1;
+    s = s + '#';
+    for (int i = 0; i < s.size() - 1; i++) {
+        if (s[i] != s[i + 1]) {
+            mmap[s[i]] = true;
+            cnt = 1;
+        } else if (s[i] == s[i + 1]) {
+            cnt++;
+            if (cnt % n == 0) {
+                sset.insert(s[i]);
+                cnt = 1;
+                i++;
+            }
         }
     }
-    set<int> fset;
-    for (auto it = sset.begin(); it != sset.end(); it++) {
-        for (int i = 0; i < s.size() - 2; i++) {
-           if (*it == s[i]) {
-               if (*it == s[i + 1] && *it == s[i + 2])
-                   fset.insert(s[i]);
-           }
-        }    
+    set<char> newset = sset;
+    for (int i = 0; i < s.size() - 1; i++) {
+        if (mmap[s[i]] == true && sset.find(s[i]) != sset.end()) // sset中找到了s[i] s[i]却不是重复的
+            newset.erase(s[i]);
     }
-    for (auto it = fset.begin(); it != fset.end(); it++)
+    for (auto it = newset.begin(); it != newset.end(); it++)
         cout << *it;
+    cout << endl;
+    for (int i = 0; i < s.size() - 1; i++) {
+        cout << s[i];
+        if (newset.find(s[i]) != newset.end())
+            i = i + n - 1;
+    }
     return 0;
 }
+// 磨叽了一星期 终于有分了 16 分！
