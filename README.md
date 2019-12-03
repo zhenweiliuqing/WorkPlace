@@ -1,2 +1,2 @@
 # WorkPlace
-Learn data structure and algorithm.
+Learning data structures and algorithms.
