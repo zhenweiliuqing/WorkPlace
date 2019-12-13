@@ -71,10 +71,11 @@
 //     return 0;
 // }
 
-// 2019-10-15
+// 2019-12-5
 // 思路: 先建立一个对照的平方的数组 
 // 然后从最大的开始进行深度优先搜索 判断是否满足条件 
 // 然后依次深入递归
+// 关键是找到结束递归的条件 进入递归的参数 从哪里进入递归 不满足条件返回到哪里
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -90,30 +91,65 @@ void init() {
         index++;
     }
 }
-void dfs(int index, int sum, int knum, int sumIndex) {
-    if (knum > k || sum > n)
+// 不懂
+// void dfs(int index, int sum, int knum, int sumIndex) {
+//     if (knum > k || sum > n)
+//         return;
+//     if (sum == n) {
+//         if (knum == k && sumIndex > max_sumIndex) {
+//             res = tempres;
+//             max_sumIndex = sumIndex;
+//         }
+//         return;
+//     }
+
+//     while (index > 0) {
+//         tempres.push_back(index);
+//         for (int i = index; i > 0; i--) {
+//             dfs(i, sum + square[index], knum + 1, sumIndex + i);
+//         }
+//         tempres.pop_back();
+//         if (index == 1)
+//             return;
+//         index--;
+//     }
+// }
+// 还是自己写的容易懂
+void dfs(int i, int sum,int sumIndex){
+    sum += square[i];
+    sumIndex += i;
+    tempres.push_back(i);
+    if (sum > n || tempres.size() > k) {
+        tempres.pop_back();
         return;
-    if (sum == n && k == knum) {
-        if (sumIndex > max_sumIndex) {
-            res = tempres;
-            max_sumIndex = sumIndex;
-        }
-        return;
+    }
+    if (sum == n) {
+         if (tempres.size() == k && sumIndex > max_sumIndex) {
+             res = tempres;
+             max_sumIndex = sumIndex;
+         }
+         tempres.pop_back();
+         return;
     }
 
-    while (index > 0) {
-        tempres.push_back(index);
-        for (int i = index; i > 0; i--) {
-            dfs(i, sum + , knum + 1, sumIndex + i);
-        }
-        tempres.pop_back();
-        if (index == 1)
-            return;
-        index--;
+    for (int j = i; j > 0; j--) {
+        dfs(j, sum, sumIndex);
     }
+    tempres.pop_back();
 }
 int main () {
     cin >> n >> k >> p;
     init();
-    dfs(square.size() - 1, 0, 0, 0);
+    for (int i = square.size() - 1; i > 0; i--)
+        dfs(i, 0, 0);
+    if (max_sumIndex == -1){
+        printf("Impossible");
+        return 0;
+    }
+    printf("%d = %d^%d", n, res[0], p);
+    for (int i = 1; i < res.size(); i++)
+        printf(" + %d^%d", res[i], p);
+    return 0;
 }
+// 27分 段错误
+// Impossible 满分！！！
