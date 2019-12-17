@@ -88,7 +88,7 @@ using namespace std;
 int father[10010];
 struct node {
     int id;
-    double house, house_m;
+    double house, house_area;
 };
 struct family {
     int id, num;
@@ -131,9 +131,9 @@ int main() {
             cin >> child;
             Union(child, id);
         }
-        double house_num, house_m2;
-        cin >> house_num >> house_m2;
-        v[i] = {id, house_num, house_m2};
+        double house_num, house_area;
+        cin >> house_num >> house_area;
+        v[i] = {id, house_num, house_area};
     }
     int cnt = 0;
     vector<family> res;
