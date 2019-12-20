@@ -126,5 +126,6 @@ map<int, int, greater<int>> dp;//按照key从大到小
     找不到会返回s.end 否则返回那个迭代器
 
 21. string s;
-    s[i]可以作为char 用于 set map 中的类型。
-    
+    s[i] 可以作为char 用于 set map 中的类型。
+    s[i] 不是string类型的值，不能赋值给string类型，但是可以进行 +=。
+    s[i] 可以直接赋值给int char类型的值，是ASCII值，但是经过to_string转换不回来，转换成ASCII对应的那个两位数。
