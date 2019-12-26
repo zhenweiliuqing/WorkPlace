@@ -129,3 +129,11 @@ map<int, int, greater<int>> dp;//按照key从大到小
     s[i] 可以作为char 用于 set map 中的类型。
     s[i] 不是string类型的值，不能赋值给string类型，但是可以进行 +=。
     s[i] 可以直接赋值给int char类型的值，是ASCII值，但是经过to_string转换不回来，转换成ASCII对应的那个两位数。
+
+22. string 逆序
+    reverse(s.begin(), s.end()); // 把s本身给逆了
+    string s(str.rbegin(), str.rend()); // 定义的时候就是逆序
+
+23. for简便写法
+    for (auto it : in)
+        cout << it;
