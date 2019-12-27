@@ -137,3 +137,7 @@ map<int, int, greater<int>> dp;//按照key从大到小
 23. for简便写法
     for (auto it : in)
         cout << it;
+
+24. fill 用法
+    int x[100];
+    fill(x, x + 100, 12);
